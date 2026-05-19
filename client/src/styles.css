@@ -1,0 +1,276 @@
+* { box-sizing: border-box; }
+
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background: #1e2127;
+  color: #e6e8eb;
+  overflow: hidden;
+}
+
+.app {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+}
+
+/* ---------- Sidebar ---------- */
+.sidebar {
+  width: 280px;
+  min-width: 240px;
+  background: #2a2f38;
+  border-right: 1px solid #3a414c;
+  padding: 18px 16px;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.sidebar-header h1 {
+  font-size: 18px;
+  margin: 0 0 4px;
+  color: #fff;
+}
+.sidebar-header .subtitle {
+  font-size: 12px;
+  color: #98a1ad;
+  margin: 0 0 14px;
+  line-height: 1.4;
+}
+
+.catalog {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.catalog-item {
+  background: #353b47;
+  border: 1px solid #3f4753;
+  border-radius: 8px;
+  padding: 8px 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  color: #e6e8eb;
+  font-size: 11px;
+  transition: background 0.15s, transform 0.05s;
+}
+.catalog-item:hover { background: #424a58; }
+.catalog-item:active { transform: scale(0.97); }
+.catalog-icon {
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ---------- Selected-item panel ---------- */
+.selected-panel {
+  background: #1f242c;
+  border: 1px solid #3a414c;
+  border-radius: 8px;
+  padding: 10px 12px;
+  margin-bottom: 12px;
+}
+.selected-title {
+  font-size: 13px;
+  color: #cfd6e0;
+  font-weight: 500;
+}
+.selected-title span { color: #4c8bf5; }
+.selected-meta {
+  font-size: 11px;
+  color: #98a1ad;
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  margin: 4px 0 8px;
+}
+.selected-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+.btn-sm {
+  font-size: 11px;
+  padding: 6px 8px;
+  text-align: left;
+}
+.kbd-hint {
+  font-size: 10px;
+  color: #6e7783;
+  margin: 8px 0 0;
+}
+
+/* ---------- Action buttons ---------- */
+.actions {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 12px;
+  border-top: 1px solid #3a414c;
+}
+
+.btn {
+  background: #3a414c;
+  color: #e6e8eb;
+  border: 1px solid #4a5260;
+  padding: 9px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  transition: background 0.15s;
+}
+.btn:hover { background: #4a5260; }
+.btn:disabled { opacity: 0.6; cursor: not-allowed; }
+.btn-primary {
+  background: #4c8bf5;
+  border-color: #4c8bf5;
+  color: #fff;
+}
+.btn-primary:hover { background: #3d7be4; }
+.btn-danger {
+  background: transparent;
+  border-color: #d9534f;
+  color: #d9534f;
+}
+.btn-danger:hover { background: rgba(217, 83, 79, 0.12); }
+
+.status {
+  font-size: 11px;
+  margin: 8px 0 0;
+  color: #98a1ad;
+}
+.status.ok { color: #5cb85c; }
+.status.error { color: #d9534f; }
+
+/* ---------- Canvas / Room ---------- */
+.canvas-area {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: #15171c;
+  overflow: hidden;
+}
+
+.room-wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.room {
+  position: relative;
+  width: min(100%, 1100px);
+  height: 100%;
+  max-height: calc(100vh - 80px);
+  aspect-ratio: 4 / 3;
+  background-color: #d8c5a8;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 8px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+  overflow: hidden;
+  border: 3px solid #4a3f30;
+}
+
+.floorplan-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.room-meta {
+  font-size: 11px;
+  color: #98a1ad;
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+}
+
+/* ---------- Furniture items (Rnd children) ---------- */
+.furniture {
+  position: absolute !important;
+  user-select: none;
+}
+.furniture-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  cursor: move;
+  outline: 2px solid transparent;
+  transition: outline-color 0.1s;
+  overflow: visible;
+}
+.furniture.selected .furniture-inner {
+  outline: 2px dashed #4c8bf5;
+  outline-offset: 2px;
+}
+
+/* The rotator wraps the SVG and applies the rotation. It is sized to the
+ * SVG's "natural" (un-rotated) dimensions and centered in the bounding box.
+ * When rotation is 90°/270° the bounding box itself has had its w/h swapped
+ * (see App.jsx handleRotate), so the rotated SVG visually fills the box. */
+.furniture-rotator {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform-origin: center;
+  pointer-events: none;
+}
+.furniture-rotator svg {
+  display: block;
+}
+
+/* ---------- Resize handles (react-rnd) ---------- */
+/* Hide by default; show when the parent .furniture is .selected. */
+.rnd-handle-corner,
+.rnd-handle-edge {
+  opacity: 0;
+  transition: opacity 0.12s;
+}
+.furniture.selected .rnd-handle-corner,
+.furniture.selected .rnd-handle-edge {
+  opacity: 1;
+}
+.rnd-handle-corner {
+  background: #fff;
+  border: 2px solid #4c8bf5;
+  border-radius: 3px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.4);
+}
+.rnd-handle-edge {
+  background: rgba(76, 139, 245, 0.15);
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 720px) {
+  .app { flex-direction: column; }
+  .sidebar {
+    width: 100%;
+    min-width: 0;
+    max-height: 45vh;
+    border-right: none;
+    border-bottom: 1px solid #3a414c;
+  }
+  .canvas-area { padding: 12px; }
+  .room { max-height: calc(55vh - 40px); }
+  .catalog { grid-template-columns: repeat(4, 1fr); }
+  .actions { flex-direction: row; }
+  .actions .btn { flex: 1; }
+}
