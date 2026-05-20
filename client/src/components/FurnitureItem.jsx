@@ -18,6 +18,8 @@ export default function FurnitureItem({
   bounds,
   onChange,
   onSelect,
+  onDrag,
+  onDragEnd,
   selected,
 }) {
   const spec = CATALOG_BY_TYPE[item.type];
@@ -39,7 +41,26 @@ export default function FurnitureItem({
       minHeight={minHeight}
       resizeHandleClasses={HANDLE_CLASSES}
       onDragStart={() => onSelect(item.id)}
-      onDragStop={(_e, d) => onChange(item.id, { x: d.x, y: d.y })}
+      onDrag={(_e, d) =>
+        onDrag?.(item.id, {
+          x: d.x,
+          y: d.y,
+          width: item.width,
+          height: item.height,
+        })
+      }
+      onDragStop={(_e, d) => {
+        if (onDragEnd) {
+          onDragEnd(item.id, {
+            x: d.x,
+            y: d.y,
+            width: item.width,
+            height: item.height,
+          });
+        } else {
+          onChange(item.id, { x: d.x, y: d.y });
+        }
+      }}
       onResizeStart={() => onSelect(item.id)}
       onResizeStop={(_e, _dir, ref, _delta, position) => {
         onChange(item.id, {

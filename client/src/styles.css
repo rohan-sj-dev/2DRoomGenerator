@@ -197,6 +197,26 @@ html, body, #root {
   z-index: 0;
 }
 
+/* The interior is the area inside the visible walls — furniture is bound here,
+ * so dragging stops at the wall rather than at the outer room border.
+ * The inset roughly matches the wall thickness drawn in the floor plan SVG. */
+.room-interior {
+  position: absolute;
+  inset: 2.2%;
+  z-index: 1;
+}
+
+/* Alignment guides shown while dragging an item that lines up with another. */
+.guide {
+  position: absolute;
+  background: #4c8bf5;
+  pointer-events: none;
+  z-index: 9999;
+  box-shadow: 0 0 6px rgba(76, 139, 245, 0.7);
+}
+.guide-v { width: 1px; top: 0; bottom: 0; }
+.guide-h { height: 1px; left: 0; right: 0; }
+
 .room-meta {
   font-size: 11px;
   color: #98a1ad;
