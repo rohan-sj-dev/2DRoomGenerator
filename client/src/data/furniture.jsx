@@ -65,18 +65,17 @@ export function FurnitureIcon({ type, width = 80, height = 80 }) {
     case "sofa":
       return (
         <svg {...props}>
-          {/* backrest / outer frame */}
-          <rect x="0" y="10" width="100" height="35" rx="6" fill="#6f5a3f" />
-          {/* left arm */}
-          <rect x="0" y="20" width="18" height="80" rx="6" fill="#5c4b35" />
-          {/* right arm (mirror) */}
-          <rect x="82" y="20" width="18" height="80" rx="6" fill="#5c4b35" />
+          {/* backrest / outer frame — touches the top edge */}
+          <rect x="0" y="0" width="100" height="35" rx="6" fill="#6f5a3f" />
+          {/* arms — touch the left/right/bottom edges */}
+          <rect x="0" y="10" width="18" height="90" rx="6" fill="#5c4b35" />
+          <rect x="82" y="10" width="18" height="90" rx="6" fill="#5c4b35" />
           {/* seat base */}
-          <rect x="3" y="40" width="94" height="58" rx="6" fill="#8b6f4e" />
+          <rect x="3" y="30" width="94" height="68" rx="6" fill="#8b6f4e" />
           {/* three seat cushions, symmetric about x=50 */}
-          <rect x="20" y="48" width="18" height="44" rx="3" fill="#c8a980" />
-          <rect x="41" y="48" width="18" height="44" rx="3" fill="#c8a980" />
-          <rect x="62" y="48" width="18" height="44" rx="3" fill="#c8a980" />
+          <rect x="20" y="38" width="18" height="54" rx="3" fill="#c8a980" />
+          <rect x="41" y="38" width="18" height="54" rx="3" fill="#c8a980" />
+          <rect x="62" y="38" width="18" height="54" rx="3" fill="#c8a980" />
         </svg>
       );
     case "armchair":
@@ -100,8 +99,9 @@ export function FurnitureIcon({ type, width = 80, height = 80 }) {
     case "diningTable":
       return (
         <svg {...props}>
-          <ellipse cx="50" cy="50" rx="49" ry="49" fill="#8b5a2b" />
-          <ellipse cx="50" cy="50" rx="44" ry="44" fill="#b07d4b" />
+          {/* rx/ry = 50 so the ellipse touches all four viewBox edges */}
+          <ellipse cx="50" cy="50" rx="50" ry="50" fill="#8b5a2b" />
+          <ellipse cx="50" cy="50" rx="45" ry="45" fill="#b07d4b" />
         </svg>
       );
     case "bed":
@@ -120,37 +120,38 @@ export function FurnitureIcon({ type, width = 80, height = 80 }) {
     case "lamp":
       return (
         <svg {...props}>
-          {/* shade — symmetric triangle filling top half */}
-          <polygon points="50,2 6,55 94,55" fill="#f6c453" />
+          {/* shade — triangle spanning full width at the base, apex at the top edge */}
+          <polygon points="50,0 0,55 100,55" fill="#f6c453" />
           {/* pole, centered */}
-          <rect x="46" y="55" width="8" height="32" fill="#555" />
-          {/* base, centered */}
-          <ellipse cx="50" cy="93" rx="42" ry="7" fill="#333" />
+          <rect x="46" y="55" width="8" height="35" fill="#555" />
+          {/* base ellipse spanning full width at the bottom edge */}
+          <ellipse cx="50" cy="93" rx="50" ry="7" fill="#333" />
         </svg>
       );
     case "plant":
       return (
         <svg {...props}>
-          {/* foliage clusters, symmetric about cx=50 */}
-          <ellipse cx="50" cy="35" rx="44" ry="32" fill="#3f8a4d" />
-          <ellipse cx="28" cy="28" rx="16" ry="14" fill="#4fa05c" />
-          <ellipse cx="72" cy="28" rx="16" ry="14" fill="#4fa05c" />
-          <ellipse cx="50" cy="20" rx="20" ry="14" fill="#5ab268" />
-          {/* pot */}
-          <polygon points="20,65 80,65 73,98 27,98" fill="#a05a2c" />
-          <ellipse cx="50" cy="65" rx="30" ry="4" fill="#7a4520" />
+          {/* foliage cluster — fills full width and reaches the top edge */}
+          <ellipse cx="50" cy="35" rx="50" ry="35" fill="#3f8a4d" />
+          <ellipse cx="20" cy="25" rx="20" ry="18" fill="#4fa05c" />
+          <ellipse cx="80" cy="25" rx="20" ry="18" fill="#4fa05c" />
+          <ellipse cx="50" cy="15" rx="25" ry="15" fill="#5ab268" />
+          {/* pot — top edge at full width, base touches bottom edge */}
+          <polygon points="0,65 100,65 88,100 12,100" fill="#a05a2c" />
+          <ellipse cx="50" cy="65" rx="50" ry="5" fill="#7a4520" />
         </svg>
       );
     case "tv":
       return (
         <svg {...props}>
-          {/* bezel */}
-          <rect x="0" y="2" width="100" height="80" rx="4" fill="#222" />
+          {/* bezel — touches top, left, right edges */}
+          <rect x="0" y="0" width="100" height="80" rx="4" fill="#222" />
           {/* screen */}
-          <rect x="4" y="7" width="92" height="70" rx="2" fill="#3a6fa1" />
+          <rect x="4" y="5" width="92" height="70" rx="2" fill="#3a6fa1" />
           {/* stand, centered */}
-          <rect x="35" y="82" width="30" height="10" fill="#333" />
-          <rect x="20" y="92" width="60" height="6" rx="2" fill="#333" />
+          <rect x="40" y="80" width="20" height="12" fill="#333" />
+          {/* base — touches the bottom edge */}
+          <rect x="15" y="92" width="70" height="8" rx="2" fill="#333" />
         </svg>
       );
     case "rug":

@@ -6,5 +6,6 @@ build/
 .env
 .vscode/
 .idea/
-server/layouts/*.json
-!server/layouts/.gitkeep
+# Keep the canonical layout.json (ships as the demo) and .gitkeep tracked;
+# ignore only the timestamped history snapshots that the server writes.
+server/layouts/layout-*.json

@@ -1,0 +1,107 @@
+{
+  "version": 1,
+  "savedAt": "2026-05-19T12:00:00.000Z",
+  "room": { "width": 1014, "height": 760 },
+  "items": [
+    {
+      "id": "sample_rug",
+      "type": "rug",
+      "x": 200,
+      "y": 220,
+      "width": 520,
+      "height": 300,
+      "rotation": 0,
+      "zIndex": 1
+    },
+    {
+      "id": "sample_sofa",
+      "type": "sofa",
+      "x": 270,
+      "y": 70,
+      "width": 380,
+      "height": 120,
+      "rotation": 0,
+      "zIndex": 3
+    },
+    {
+      "id": "sample_table",
+      "type": "table",
+      "x": 380,
+      "y": 310,
+      "width": 160,
+      "height": 90,
+      "rotation": 0,
+      "zIndex": 4
+    },
+    {
+      "id": "sample_arm_left",
+      "type": "armchair",
+      "x": 90,
+      "y": 80,
+      "width": 130,
+      "height": 130,
+      "rotation": 0,
+      "zIndex": 3
+    },
+    {
+      "id": "sample_arm_right",
+      "type": "armchair",
+      "x": 700,
+      "y": 80,
+      "width": 130,
+      "height": 130,
+      "rotation": 0,
+      "zIndex": 3
+    },
+    {
+      "id": "sample_lamp_left",
+      "type": "lamp",
+      "x": 30,
+      "y": 580,
+      "width": 65,
+      "height": 75,
+      "rotation": 0,
+      "zIndex": 5
+    },
+    {
+      "id": "sample_plant",
+      "type": "plant",
+      "x": 880,
+      "y": 580,
+      "width": 95,
+      "height": 130,
+      "rotation": 0,
+      "zIndex": 5
+    },
+    {
+      "id": "sample_tv",
+      "type": "tv",
+      "x": 360,
+      "y": 650,
+      "width": 280,
+      "height": 80,
+      "rotation": 0,
+      "zIndex": 4
+    },
+    {
+      "id": "sample_bookshelf",
+      "type": "bookshelf",
+      "x": 900,
+      "y": 220,
+      "width": 50,
+      "height": 200,
+      "rotation": 90,
+      "zIndex": 3
+    },
+    {
+      "id": "sample_diningtable",
+      "type": "diningTable",
+      "x": 130,
+      "y": 540,
+      "width": 180,
+      "height": 130,
+      "rotation": 0,
+      "zIndex": 4
+    }
+  ]
+}

@@ -238,8 +238,11 @@ html, body, #root {
   overflow: visible;
 }
 .furniture.selected .furniture-inner {
+  /* Outline drawn INSIDE the bounding box (negative offset). Its outer edge
+   * coincides exactly with the box edge, so the dashed border aligns 1:1 with
+   * the alignment guides shown while dragging. */
   outline: 2px dashed #4c8bf5;
-  outline-offset: 2px;
+  outline-offset: -2px;
 }
 
 /* The rotator wraps the SVG and applies the rotation. It is sized to the
