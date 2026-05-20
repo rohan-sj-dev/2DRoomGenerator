@@ -52,15 +52,13 @@ A sample layout ([server/layouts/layout.json](server/layouts/layout.json)) ships
 
 ## Screenshots
 
-> Capture these from a running session and drop them into `docs/`. The README references the four filenames below.
-
 ### Demo Layout
 The sample layout that ships with the repo: rug centered, sofa above it, armchairs flanking, coffee table on the rug, TV on the south wall, dining table in the bottom-left, lamp in the corner, plant opposite, and a vertical bookshelf along the right wall.
 
 ![Demo Layout](docs/demo-layout.png)
 
 ### Layering Demo
-A sofa placed on top of a rug, then the rug brought above the sofa using **Send to Back / Bring to Front**. Demonstrates explicit z-ordering: clicking does not change the stack — only the layering buttons do.
+A rug placed on top of a table, then the table brought above the rug using **Send to Back / Bring to Front**. Demonstrates explicit z-ordering: clicking does not change the stack — only the layering buttons do.
 
 ![Layering Demo](docs/layering-demo.png)
 
