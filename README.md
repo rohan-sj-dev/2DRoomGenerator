@@ -54,8 +54,6 @@ A sample layout ([server/layouts/layout.json](server/layouts/layout.json)) ships
 
 ## Screenshots
 
-> Capture these from a running session and drop them into `docs/`. The README references the four filenames below.
-
 ### Demo Layout
 The sample layout that ships with the repo: rug centered, sofa above it, armchairs flanking, coffee table on the rug, TV on the south wall, dining table in the bottom-left, lamp in the corner, plant opposite, and a vertical bookshelf along the right wall.
 
