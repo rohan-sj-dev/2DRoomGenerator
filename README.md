@@ -6,8 +6,6 @@ A prototype interior-design web application. Pick furniture from the sidebar, dr
 
 ## Quick Start
 
-> Requires Node.js 18+ and npm.
-
 **Install** (single line):
 
 ```bash
