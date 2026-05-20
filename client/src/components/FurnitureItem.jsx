@@ -27,8 +27,8 @@ export default function FurnitureItem({
   const minHeight = spec?.minHeight ?? 30;
   const rot = item.rotation || 0;
   const swap = rot === 90 || rot === 270;
-  // Inner SVG draws in its "natural" orientation (pre-rotation), then a CSS
-  // rotate makes it fill the rotated bounding box.
+  // Inner SVG keeps the un-rotated aspect; the CSS rotate below maps it onto
+  // the rotated bounding box.
   const innerW = swap ? item.height : item.width;
   const innerH = swap ? item.width : item.height;
 

@@ -1,10 +1,6 @@
-// Furniture catalog. Each entry defines the asset's defaults and how to render its icon.
-// Icons are inline SVGs so the app stays portable and works offline.
-//
-// IMPORTANT: every SVG below is drawn so its visual fills the full 0..100 viewBox
-// in both axes (where the shape is naturally rectangular). The Rnd bounding box
-// then matches the visible furniture — no whitespace mismatch.
-// Symmetry: visuals are mirrored left-to-right where the real-life object is.
+// Each SVG below is drawn to reach all four edges of the 0..100 viewBox so the
+// Rnd bounding box matches the visible furniture; alignment guides snap to the
+// box edges and the visual edges coincide.
 
 export const FURNITURE_CATALOG = [
   { type: "sofa", label: "Sofa", defaultWidth: 180, defaultHeight: 80, minWidth: 80, minHeight: 40 },
@@ -65,14 +61,10 @@ export function FurnitureIcon({ type, width = 80, height = 80 }) {
     case "sofa":
       return (
         <svg {...props}>
-          {/* backrest / outer frame — touches the top edge */}
           <rect x="0" y="0" width="100" height="35" rx="6" fill="#6f5a3f" />
-          {/* arms — touch the left/right/bottom edges */}
           <rect x="0" y="10" width="18" height="90" rx="6" fill="#5c4b35" />
           <rect x="82" y="10" width="18" height="90" rx="6" fill="#5c4b35" />
-          {/* seat base */}
           <rect x="3" y="30" width="94" height="68" rx="6" fill="#8b6f4e" />
-          {/* three seat cushions, symmetric about x=50 */}
           <rect x="20" y="38" width="18" height="54" rx="3" fill="#c8a980" />
           <rect x="41" y="38" width="18" height="54" rx="3" fill="#c8a980" />
           <rect x="62" y="38" width="18" height="54" rx="3" fill="#c8a980" />
@@ -81,11 +73,8 @@ export function FurnitureIcon({ type, width = 80, height = 80 }) {
     case "armchair":
       return (
         <svg {...props}>
-          {/* outer frame (backrest+arms) */}
           <rect x="0" y="0" width="100" height="100" rx="10" fill="#3a5572" />
-          {/* inner body */}
           <rect x="12" y="10" width="76" height="86" rx="8" fill="#4a6c8a" />
-          {/* seat cushion */}
           <rect x="22" y="28" width="56" height="58" rx="6" fill="#7da3c2" />
         </svg>
       );
@@ -99,7 +88,6 @@ export function FurnitureIcon({ type, width = 80, height = 80 }) {
     case "diningTable":
       return (
         <svg {...props}>
-          {/* rx/ry = 50 so the ellipse touches all four viewBox edges */}
           <ellipse cx="50" cy="50" rx="50" ry="50" fill="#8b5a2b" />
           <ellipse cx="50" cy="50" rx="45" ry="45" fill="#b07d4b" />
         </svg>
@@ -108,11 +96,8 @@ export function FurnitureIcon({ type, width = 80, height = 80 }) {
       return (
         <svg {...props}>
           <rect x="0" y="0" width="100" height="100" rx="6" fill="#cfd8e3" />
-          {/* headboard */}
           <rect x="3" y="3" width="94" height="22" rx="3" fill="#f0f4f8" />
-          {/* mattress */}
           <rect x="3" y="28" width="94" height="69" rx="3" fill="#9bb3c9" />
-          {/* two pillows, symmetric */}
           <rect x="10" y="6" width="36" height="16" rx="3" fill="#fff" />
           <rect x="54" y="6" width="36" height="16" rx="3" fill="#fff" />
         </svg>
@@ -120,23 +105,18 @@ export function FurnitureIcon({ type, width = 80, height = 80 }) {
     case "lamp":
       return (
         <svg {...props}>
-          {/* shade — triangle spanning full width at the base, apex at the top edge */}
           <polygon points="50,0 0,55 100,55" fill="#f6c453" />
-          {/* pole, centered */}
           <rect x="46" y="55" width="8" height="35" fill="#555" />
-          {/* base ellipse spanning full width at the bottom edge */}
           <ellipse cx="50" cy="93" rx="50" ry="7" fill="#333" />
         </svg>
       );
     case "plant":
       return (
         <svg {...props}>
-          {/* foliage cluster — fills full width and reaches the top edge */}
           <ellipse cx="50" cy="35" rx="50" ry="35" fill="#3f8a4d" />
           <ellipse cx="20" cy="25" rx="20" ry="18" fill="#4fa05c" />
           <ellipse cx="80" cy="25" rx="20" ry="18" fill="#4fa05c" />
           <ellipse cx="50" cy="15" rx="25" ry="15" fill="#5ab268" />
-          {/* pot — top edge at full width, base touches bottom edge */}
           <polygon points="0,65 100,65 88,100 12,100" fill="#a05a2c" />
           <ellipse cx="50" cy="65" rx="50" ry="5" fill="#7a4520" />
         </svg>
@@ -144,13 +124,9 @@ export function FurnitureIcon({ type, width = 80, height = 80 }) {
     case "tv":
       return (
         <svg {...props}>
-          {/* bezel — touches top, left, right edges */}
           <rect x="0" y="0" width="100" height="80" rx="4" fill="#222" />
-          {/* screen */}
           <rect x="4" y="5" width="92" height="70" rx="2" fill="#3a6fa1" />
-          {/* stand, centered */}
           <rect x="40" y="80" width="20" height="12" fill="#333" />
-          {/* base — touches the bottom edge */}
           <rect x="15" y="92" width="70" height="8" rx="2" fill="#333" />
         </svg>
       );

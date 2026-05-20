@@ -13,12 +13,11 @@ function makeId() {
 export default function App() {
   const [items, setItems] = useState([]);
   const [selectedId, setSelectedId] = useState(null);
-  const [savingState, setSavingState] = useState("idle"); // idle | saving | ok | error
+  const [savingState, setSavingState] = useState("idle");
   const [lastSavedAt, setLastSavedAt] = useState(null);
   const roomSizeRef = useRef({ width: 0, height: 0 });
   const zCounter = useRef(1);
 
-  // On first load, try to fetch the most recently saved layout from the server.
   useEffect(() => {
     let cancelled = false;
     (async () => {
@@ -64,9 +63,8 @@ export default function App() {
     setItems((prev) => prev.map((it) => (it.id === id ? { ...it, ...patch } : it)));
   }, []);
 
-  // Selecting an item no longer changes z-order — otherwise the user could
-  // never keep a rug below a sofa (clicking the rug would put it on top).
-  // Use Bring to Front / Send to Back explicitly.
+  // Selecting does not change z-order; use Bring to Front / Send to Back
+  // explicitly, otherwise a rug placed first could never stay below a sofa.
   const handleSelect = useCallback((id) => {
     setSelectedId(id);
   }, []);
@@ -88,7 +86,6 @@ export default function App() {
       prev.map((it) => {
         if (it.id !== id) return it;
         const nextRot = ((it.rotation || 0) + 90) % 360;
-        // Every 90° step flips the bounding box's aspect, regardless of direction.
         return {
           ...it,
           rotation: nextRot,
@@ -159,7 +156,6 @@ export default function App() {
     }
   }, []);
 
-  // Keyboard shortcuts for the selected item.
   useEffect(() => {
     const onKey = (e) => {
       if (e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA") return;

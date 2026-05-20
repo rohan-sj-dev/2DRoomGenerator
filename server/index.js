@@ -19,7 +19,6 @@ app.get("/api/health", (_req, res) => {
   res.json({ ok: true, time: new Date().toISOString() });
 });
 
-// Save layout: writes the full payload to layouts/layout.json (and a timestamped copy for history)
 app.post("/api/layout", (req, res) => {
   const payload = req.body;
 
@@ -40,7 +39,6 @@ app.post("/api/layout", (req, res) => {
   try {
     fs.writeFileSync(DEFAULT_LAYOUT_FILE, JSON.stringify(record, null, 2), "utf8");
 
-    // History snapshot — lets the user roll back if desired
     const stamp = record.savedAt.replace(/[:.]/g, "-");
     const historyFile = path.join(LAYOUTS_DIR, `layout-${stamp}.json`);
     fs.writeFileSync(historyFile, JSON.stringify(record, null, 2), "utf8");
@@ -52,7 +50,6 @@ app.post("/api/layout", (req, res) => {
   }
 });
 
-// Load the most recently saved layout
 app.get("/api/layout", (_req, res) => {
   try {
     if (!fs.existsSync(DEFAULT_LAYOUT_FILE)) {

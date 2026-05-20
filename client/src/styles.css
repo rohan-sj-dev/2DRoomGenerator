@@ -197,16 +197,14 @@ html, body, #root {
   z-index: 0;
 }
 
-/* The interior is the area inside the visible walls — furniture is bound here,
- * so dragging stops at the wall rather than at the outer room border.
- * The inset roughly matches the wall thickness drawn in the floor plan SVG. */
+/* Furniture is bound to this interior, so dragging stops at the visible wall.
+ * The inset matches the wall thickness drawn in the floor plan SVG. */
 .room-interior {
   position: absolute;
   inset: 2.2%;
   z-index: 1;
 }
 
-/* Alignment guides shown while dragging an item that lines up with another. */
 .guide {
   position: absolute;
   background: #4c8bf5;
@@ -238,17 +236,14 @@ html, body, #root {
   overflow: visible;
 }
 .furniture.selected .furniture-inner {
-  /* Outline drawn INSIDE the bounding box (negative offset). Its outer edge
-   * coincides exactly with the box edge, so the dashed border aligns 1:1 with
-   * the alignment guides shown while dragging. */
+  /* Negative offset paints the outline inside the box so its outer edge sits
+   * exactly on the bounding-box edge that alignment guides snap to. */
   outline: 2px dashed #4c8bf5;
   outline-offset: -2px;
 }
 
-/* The rotator wraps the SVG and applies the rotation. It is sized to the
- * SVG's "natural" (un-rotated) dimensions and centered in the bounding box.
- * When rotation is 90°/270° the bounding box itself has had its w/h swapped
- * (see App.jsx handleRotate), so the rotated SVG visually fills the box. */
+/* Sized to the un-rotated SVG and centered; the CSS rotate below maps it onto
+ * the (already swapped) bounding box for 90°/270°. */
 .furniture-rotator {
   position: absolute;
   top: 50%;
@@ -261,7 +256,6 @@ html, body, #root {
 }
 
 /* ---------- Resize handles (react-rnd) ---------- */
-/* Hide by default; show when the parent .furniture is .selected. */
 .rnd-handle-corner,
 .rnd-handle-edge {
   opacity: 0;

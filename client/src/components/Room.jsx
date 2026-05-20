@@ -1,15 +1,12 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import FurnitureItem from "./FurnitureItem.jsx";
 
-// Optional remote empty-room image. Set to a URL to use a photo as the
-// background; leave null to use the built-in top-down floor plan, which is
-// guaranteed empty and works offline.
+// Set to a URL to use a photo as the room background; null uses the built-in
+// SVG floor plan, which is guaranteed empty and works offline.
 const ROOM_IMAGE = null;
 
-// Pixel threshold for showing an alignment guide / snapping on drop.
 const SNAP_THRESHOLD = 6;
 
-// Top-down empty room: wooden plank floor, four walls, a door and a window.
 function EmptyFloorPlan() {
   return (
     <svg
@@ -55,8 +52,6 @@ function EmptyFloorPlan() {
   );
 }
 
-// Snap one edge candidate to the nearest target edge within threshold.
-// Returns the delta to apply, or 0 if nothing to snap.
 function bestSnapDelta(selfEdges, otherEdges, threshold) {
   let best = 0;
   let bestAbs = Infinity;
@@ -82,10 +77,8 @@ export default function Room({
 }) {
   const interiorRef = useRef(null);
   const [size, setSize] = useState({ width: 0, height: 0 });
-  // Live drag state for the active item; null when nothing is being dragged.
   const [dragRect, setDragRect] = useState(null);
 
-  // Measure the interior (the area furniture can actually occupy).
   useEffect(() => {
     if (!interiorRef.current) return;
     const el = interiorRef.current;
@@ -101,7 +94,6 @@ export default function Room({
     return () => observer.disconnect();
   }, [onRoomMeasured]);
 
-  // Active alignment guides for the dragging item.
   const guides = useMemo(() => {
     if (!dragRect) return { v: [], h: [] };
     const T = SNAP_THRESHOLD;
@@ -124,7 +116,6 @@ export default function Room({
     setDragRect({ id, ...rect });
   };
 
-  // On drop: snap to nearest aligned edge in each axis, then commit.
   const handleItemDragEnd = (id, rect) => {
     const others = items.filter((it) => it.id !== id);
     let { x, y, width, height } = rect;
@@ -134,12 +125,9 @@ export default function Room({
     const targetsX = others.flatMap((o) => [o.x, o.x + o.width / 2, o.x + o.width]);
     const targetsY = others.flatMap((o) => [o.y, o.y + o.height / 2, o.y + o.height]);
 
-    const dx = bestSnapDelta(selfX, targetsX, SNAP_THRESHOLD);
-    const dy = bestSnapDelta(selfY, targetsY, SNAP_THRESHOLD);
-    x += dx;
-    y += dy;
+    x += bestSnapDelta(selfX, targetsX, SNAP_THRESHOLD);
+    y += bestSnapDelta(selfY, targetsY, SNAP_THRESHOLD);
 
-    // Re-clamp to interior in case snap pushed us out.
     x = Math.max(0, Math.min(x, size.width - width));
     y = Math.max(0, Math.min(y, size.height - height));
 
@@ -147,6 +135,8 @@ export default function Room({
     setDragRect(null);
   };
 
+  // Clicking inside a furniture item bubbles up to here; without this check it
+  // would deselect immediately after the inner mousedown selected it.
   const handleBackgroundMouseDown = (e) => {
     if (e.target.closest && e.target.closest(".furniture")) return;
     onSelect(null);
